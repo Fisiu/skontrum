@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 public class FileSender {
 /*
  plikoZapisywacz.println("@echo off");
- plikoZapisywacz.println("if not exist y: net use y: \\192.168.0.252\\skontrum /user:skontrum skontrum");
+ plikoZapisywacz.println("if not exist y: net use y: \\someIP\someShare /user:someUser somePass");
  plikoZapisywacz.println("\r\n");
  plikoZapisywacz.println("copy *.txt y:");*/	
 	
@@ -16,7 +16,7 @@ public class FileSender {
 		try {
 			PrintWriter plikoZapisywacz = new PrintWriter("FileSender.cmd");			
 				plikoZapisywacz.println("@echo off");
-				plikoZapisywacz.println("if not exist y: net use y: \\\\192.168.0.252\\mak\\skontrum /user:skontrum skontrum");
+				plikoZapisywacz.println("if not exist y: net use y: \\\\\\someIP\\someShare /user:someUser somePass");
 				plikoZapisywacz.println("\r\n");
 				plikoZapisywacz.println("copy *.txt y:");
 				plikoZapisywacz.println("net use y: /d /y");
@@ -26,9 +26,9 @@ public class FileSender {
 			synchronized (runBatch) {
 				//Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + "FileSender.cmd");
 				//runBatch.waitFor();//Waits the process to terminate
-				runBatch.wait(5000); //czekaj 5 sekund
+				runBatch.wait(5000); //wat 'bout 5 secs
 			    if (runBatch.exitValue() == 0){			        
-			        JOptionPane.showMessageDialog(null, "Pliki skopiowane na serwer!:-)");
+			        JOptionPane.showMessageDialog(null, "Files copied to a NAS server!");
 			        usunBatch();
 			    }
 			}
@@ -41,11 +41,11 @@ public class FileSender {
 		try{
 			File batch = new File("FileSender.cmd");
 			if(batch.delete())
-				System.out.println("Batch usuniety!:)");				
+				System.out.println("Batch deleted:)");				
 			else
-				System.out.println("Nie udalo sie usunac batcha!");
+				System.out.println("Batch couldn't be deleted:[!");
 		}catch(Exception fileErr){
-			System.out.println("Cos poszlo nie tak...");
+			System.out.println("Smth went wrong O_o");
 		}		
 	};
 }

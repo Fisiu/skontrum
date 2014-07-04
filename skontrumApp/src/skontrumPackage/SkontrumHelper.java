@@ -1,4 +1,18 @@
 package skontrumPackage;
+/*SkontrumApp is an application wrote for 
+ * Municical Public Library in Oświęcim 
+ * for book inventarisation. At first, librarians 
+ * used windows notepad for "reading" book codes,
+ * minding for errors, saving file from time to time
+ * and then manually copying all .txt files from notebooks 
+ * to NAS server.
+ * This app saves librarians work every couple of codes, 
+ * on new file creation and on finishing work
+ * (by that i mean pushing "send" button)
+ * and automatically sends data to a NAS server.
+ * It's not perfect - that's why it's on github,
+ * where it can be polished:)*/
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -40,12 +54,12 @@ public class SkontrumHelper extends JPanel implements ActionListener{
 	 final FileSender  plikoWysylacz = new FileSender();
 	 
 	 Boolean czyPierwszy=true; 
-	 static String wPizduDlugiTekst = new String("Cześć!\nNajpierw kliknij 'Nowy plik', żeby stworzyć plik, do którego zapiszesz kody.\nWpisz jakąkolwiek nazwę, wciśnij 'OK', kursor automatycznie wskoczy na pole do skanowania.\nPo skończeniu całego Skontrum wciśnij przycisk 'Wyślij dane', aby wysłać zeskanowane kody na serwer.\nPo paru(~5) sekundach otrzymasz informację o zakończeniu operacji.\nMożesz wyłączyć aplikację krzyżykiem w prawym górnym rogu.");
+	 static String longWelcomeText = new String("Cześć!\nNajpierw kliknij 'Nowy plik', żeby stworzyć plik, do którego zapiszesz kody.\nWpisz jakąkolwiek nazwę, wciśnij 'OK', kursor automatycznie wskoczy na pole do skanowania.\nPo skończeniu całego Skontrum wciśnij przycisk 'Wyślij dane', aby wysłać zeskanowane kody na serwer.\nPo paru(~5) sekundach otrzymasz informację o zakończeniu operacji.\nMożesz wyłączyć aplikację krzyżykiem w prawym górnym rogu.");
      
 	 @SuppressWarnings("deprecation")
 	public SkontrumHelper(){
     	  super(new BorderLayout());
-    	  
+    	  //GUI creation
     	  panelPrzyciskow = new JPanel();
     	  panelKodow = new JPanel();
     	  
@@ -67,14 +81,14 @@ public class SkontrumHelper extends JPanel implements ActionListener{
           add(lista);
           
           ActionListener nowyListener = new ActionListener() {	
-        	  
+        
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(czyPierwszy==false){
 					plikoKreator.aktualizujPlik(fullName, kody);
 					kody.setText("");}
 				if(e.getSource()==przyciskNowy){
-					nazwaPliku = JOptionPane.showInputDialog("Podaj nazwę pliku");
+					nazwaPliku = JOptionPane.showInputDialog("Input filename");
 					fullName = (userLogin+"_"+"sko"+"_"+nazwaPliku);
 					System.out.println(fullName);
 					plikoKreator.tworzPlik(fullName);				
@@ -160,8 +174,8 @@ public class SkontrumHelper extends JPanel implements ActionListener{
         ramka.setContentPane(zawartosc);
         ramka.setResizable(false);
         ramka.setVisible(true); 
-        JOptionPane.showMessageDialog(ramka, wPizduDlugiTekst);
-        userLogin = JOptionPane.showInputDialog("Podaj swój login do systemu Windows,\nnp. adamz");
+        JOptionPane.showMessageDialog(ramka, longWelcomeText);
+        userLogin = JOptionPane.showInputDialog("Input your Windows login, eg \n adamz");
     }
  
     public static void main(String[] args) {
