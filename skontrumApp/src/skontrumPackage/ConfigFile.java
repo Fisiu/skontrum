@@ -1,7 +1,7 @@
 package skontrumPackage;
 
 public class ConfigFile {
-	public void czytajDane(){
-		
+	public void czytajDane() {
+
 	};
 }
