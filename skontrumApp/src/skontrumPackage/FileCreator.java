@@ -1,5 +1,6 @@
 package skontrumPackage;
 
+import java.io.File;
 import java.io.PrintWriter;
 
 import javax.swing.JTextArea;
@@ -28,5 +29,20 @@ public class FileCreator {
 			System.out.println("oooo");
 		}
 	};
+
+	/**
+	 * Sprawdź czy plik o podanej nazwie już istnieje.
+	 * 
+	 * @param nazwaPliku
+	 * @return true, jeśli taki plik już istnieje, w przeciwnym razie false
+	 */
+	public boolean czyPlikIstnieje(String nazwaPliku) {
+		boolean istnieje = false;
+		File file = new File(nazwaPliku + ".txt");
+		if (file.exists() && !file.isDirectory()) {
+			istnieje = true;
+		}
+		return istnieje;
+	}
 
 }

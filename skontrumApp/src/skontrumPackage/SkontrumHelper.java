@@ -93,11 +93,19 @@ public class SkontrumHelper extends JPanel implements ActionListener {
 					nazwaPliku = JOptionPane.showInputDialog("Input filename");
 					fullName = (userLogin + "_" + "sko" + "_" + nazwaPliku);
 					System.out.println(fullName);
-					plikoKreator.tworzPlik(fullName);
-					if (kody.isEnabled() == (false))
-						kody.setEnabled(true);
-					czyPierwszy = false;
-					kody.requestFocusInWindow();
+					if (!plikoKreator.czyPlikIstnieje(fullName)) {
+						plikoKreator.tworzPlik(fullName);
+						if (kody.isEnabled() == (false))
+							kody.setEnabled(true);
+						czyPierwszy = false;
+						kody.requestFocusInWindow();
+					} else {
+						// file exists, notify user
+						JOptionPane.showMessageDialog(getParent(),
+								"Plik o takiej nazwie już istnieje.\nUtwórz plik z inną nazwą.",
+								"Plik istnieje",
+								JOptionPane.INFORMATION_MESSAGE);
+					}
 				}
 			}
 		};
