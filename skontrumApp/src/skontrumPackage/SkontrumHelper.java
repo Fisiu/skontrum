@@ -58,7 +58,6 @@ public class SkontrumHelper extends JPanel implements ActionListener {
 	static String longWelcomeText = new String(
 			"Cześć!\nNajpierw kliknij 'Nowy plik', żeby stworzyć plik, do którego zapiszesz kody.\nWpisz jakąkolwiek nazwę, wciśnij 'OK', kursor automatycznie wskoczy na pole do skanowania.\nPo skończeniu całego Skontrum wciśnij przycisk 'Wyślij dane', aby wysłać zeskanowane kody na serwer.\nPo paru(~5) sekundach otrzymasz informację o zakończeniu operacji.\nMożesz wyłączyć aplikację krzyżykiem w prawym górnym rogu.");
 
-	@SuppressWarnings("deprecation")
 	public SkontrumHelper() {
 		super(new BorderLayout());
 		// GUI creation
@@ -70,7 +69,7 @@ public class SkontrumHelper extends JPanel implements ActionListener {
 
 		kody = new JTextArea("");
 		kody.getDocument().addDocumentListener(new podsluchiwacz());
-		kody.enable(false);
+		kody.setEnabled(false);
 		lista = new JScrollPane(kody, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
@@ -96,7 +95,7 @@ public class SkontrumHelper extends JPanel implements ActionListener {
 					System.out.println(fullName);
 					plikoKreator.tworzPlik(fullName);
 					if (kody.isEnabled() == (false))
-						kody.enable(true);
+						kody.setEnabled(true);
 					czyPierwszy = false;
 					kody.requestFocusInWindow();
 				}
